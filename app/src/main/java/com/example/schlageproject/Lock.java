@@ -1,5 +1,7 @@
 package com.example.schlageproject;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class Lock {
@@ -11,6 +13,8 @@ public class Lock {
     private final String _id; // Device unique identification - uuid
     private final String _name; // Device friendly name
     private final ArrayList<AccessCode> _accessCodes;
+
+    private final String debugTag = "Lock";
 
     public Lock(LockState lockState, LockBatteryState lockBatteryState, String modelName, String serialNumber, String id, String name, ArrayList<AccessCode> accessCodes) {
         this._lockState = lockState;
@@ -27,6 +31,7 @@ public class Lock {
     }
 
     public String getName() {
+        // TODO: if name is null create a generic name such as "Unnamed Lock", either here or in constructor.
         return this._name;
     }
 
@@ -57,11 +62,18 @@ public class Lock {
         * */
         switch (lockState) {
             case LOCKED:
-
+                if(this.getLockState() != LockState.LOCKED) {
+                    // Make API call to lock the lock.
+                    Log.d(this.debugTag, "Lock is " + this.getLockState().toString() + ", making call to set state to " + lockState.toString());
+                }
             case UNLOCKED:
+                if(this.getLockState() != LockState.UNLOCKED) {
+                    // Make API call to unlock the lock.
+                    Log.d(this.debugTag, "Lock is " + this.getLockState().toString() + ", making call to set state to " + lockState.toString());
+                }
 
             default:
-
+                Log.d(this.debugTag, "Lock is " + this.getLockState().toString() + ", request to set state to " + lockState.toString() + " will be ignored");
         }
     }
 }
