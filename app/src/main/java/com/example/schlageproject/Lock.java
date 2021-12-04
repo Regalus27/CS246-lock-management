@@ -1,5 +1,7 @@
 package com.example.schlageproject;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -17,13 +19,35 @@ public class Lock {
     private final String debugTag = "Lock";
 
     public Lock(LockState lockState, LockBatteryState lockBatteryState, String modelName, String serialNumber, String id, String name, ArrayList<AccessCode> accessCodes) {
-        this._lockState = lockState;
-        this._lockBatteryState = lockBatteryState;
-        this._modelName = modelName;
-        this._serialNumber = serialNumber;
-        this._id = id;
-        this._name = name;
-        this._accessCodes = accessCodes;
+        _lockState = lockState;
+        _lockBatteryState = lockBatteryState;
+        _modelName = modelName;
+        _serialNumber = serialNumber;
+        _id = id;
+        _name = name;
+        _accessCodes = accessCodes;
+    }
+
+    public void changeLockState(LockState lockState) {
+        /* @param lockState: Desired LockState for this lock.
+        * Check if lock is already in this state.
+        * If not, call the appropriate
+        * */
+        switch (lockState) {
+            case LOCKED:
+                if(this.getLockState() != LockState.LOCKED) {
+                    // Make API call to lock the lock.
+                    Log.d(debugTag, "Lock is " + getLockState().toString() + ", making call to set state to " + lockState.toString());
+                }
+            case UNLOCKED:
+                if(this.getLockState() != LockState.UNLOCKED) {
+                    // Make API call to unlock the lock.
+                    Log.d(debugTag, "Lock is " + getLockState().toString() + ", making call to set state to " + lockState.toString());
+                }
+
+            default:
+                Log.d(debugTag, "Lock is " + getLockState().toString() + ", request to set state to " + lockState.toString() + " will be ignored");
+        }
     }
 
     public String getLockID() {
@@ -32,7 +56,7 @@ public class Lock {
 
     public String getName() {
         // TODO: if name is null create a generic name such as "Unnamed Lock", either here or in constructor.
-        return this._name;
+        return _name;
     }
 
     public LockState getLockState() {
@@ -55,25 +79,4 @@ public class Lock {
         return this._accessCodes;
     }
 
-    public void changeLockState(LockState lockState) {
-        /* @param lockState: Desired LockState for this lock.
-        * Check if lock is already in this state.
-        * If not, call the appropriate
-        * */
-        switch (lockState) {
-            case LOCKED:
-                if(this.getLockState() != LockState.LOCKED) {
-                    // Make API call to lock the lock.
-                    Log.d(this.debugTag, "Lock is " + this.getLockState().toString() + ", making call to set state to " + lockState.toString());
-                }
-            case UNLOCKED:
-                if(this.getLockState() != LockState.UNLOCKED) {
-                    // Make API call to unlock the lock.
-                    Log.d(this.debugTag, "Lock is " + this.getLockState().toString() + ", making call to set state to " + lockState.toString());
-                }
-
-            default:
-                Log.d(this.debugTag, "Lock is " + this.getLockState().toString() + ", request to set state to " + lockState.toString() + " will be ignored");
-        }
-    }
 }
