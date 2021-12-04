@@ -22,7 +22,7 @@
             android:name=".LockListActivity"
             android:exported="true">
             <intent-filter>
-                // PURPOSEFULLY THROWING A WARNING HERE SO I SEE THIS AGAIN, LOGGING OFF FOR THE NIGHT
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>
