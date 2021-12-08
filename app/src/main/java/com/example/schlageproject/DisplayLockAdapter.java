@@ -14,8 +14,8 @@ import java.util.List;
 
 public class DisplayLockAdapter extends RecyclerView.Adapter<DisplayLockAdapter.ViewHolder> {
 
-    private List<DisplayLock> mData;
-    private LayoutInflater mInflater;
+    private final List<DisplayLock> mData;
+    private final LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor

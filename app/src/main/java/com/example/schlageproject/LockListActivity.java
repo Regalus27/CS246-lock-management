@@ -51,6 +51,8 @@ public class LockListActivity extends AppCompatActivity implements DisplayLockAd
 
     private void viewLockInfo(int position) {
         // Pass lock id to new page, populate it with with a full Lock.
-        Intent intent = new Intent(getApplicationContext(), Lock.class);
+        Intent intent = new Intent(getApplicationContext(), LockViewActivity.class);
+        intent.putExtra("Lock ID", displayLockAdapter.getItem(position).getID());
+        startActivity(intent);
     }
 }
