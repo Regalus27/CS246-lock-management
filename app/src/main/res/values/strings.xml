@@ -16,4 +16,7 @@
     <string name="loginPagePasswordHint">Password</string>
     <string name="account_lock_list_page_banner_text_view">Your Locks</string>
     <string name="lock">Lock</string>
+    <string name="access_code">Access Code</string>
+    <string name="change">Change</string>
+    <string name="delete">Delete</string>
 </resources>

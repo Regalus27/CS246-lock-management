@@ -1,6 +1,8 @@
 package com.example.schlageproject;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,24 +41,29 @@ public class LockViewActivity extends AppCompatActivity implements View.OnClickL
         lockID = findViewById(R.id.lockID);
         lockID.setText(lock.getLockID());
 
-        lockBatteryState = findViewById(R.id.lockBatteryState);
+        lockBatteryState = findViewById(R.id.accessCodeTextView);
         lockBatteryState.setText(lock.getLockBatteryState().toString());
 
         lockState = findViewById(R.id.lockState);
         lockState.setText(lock.getLockState().toString());
 
         manageAccessCodes = findViewById(R.id.manageAccessCodesButton);
-
         manageAccessCodes.setOnClickListener(this);
+
+        Log.d("LOCKVIEW", "Page successfully initialized");
     }
 
     @Override
     public void onClick(View v) {
+        Log.d("LOCKVIEW", "onClick: should open new page");
 
+        viewAccessCodes();
     }
 
-    private void changeAccessCode(String accessCodeID) {
-
+    private void viewAccessCodes() {
+        Intent intent = new Intent(getApplicationContext(), AccessCodeListActivity.class);
+        intent.putExtra("Lock ID", lock.getLockID());
+        startActivity(intent);
     }
 
     private Lock pullLockData(String lockID) {

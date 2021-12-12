@@ -27,7 +27,7 @@ public class LockListActivity extends AppCompatActivity implements DisplayLockAd
         lockListRecyclerView = (RecyclerView) findViewById(R.id.lockListPageRecyclerView);
         lockListRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        displayLockAdapter = new DisplayLockAdapter(getApplicationContext(), generateLockData());
+        displayLockAdapter = new DisplayLockAdapter(getApplicationContext(), pullLockData());
         displayLockAdapter.setClickListener(this);
 
         lockListRecyclerView.setAdapter(displayLockAdapter);
@@ -39,7 +39,7 @@ public class LockListActivity extends AppCompatActivity implements DisplayLockAd
         viewLockInfo(position);
     }
 
-    private List<DisplayLock> generateLockData() {
+    private List<DisplayLock> pullLockData() {
         // Poll API for lock data
         // Currently just populate with examples as Tanner didn't write any code
         List<DisplayLock> lockData = new ArrayList<>();
